@@ -1,114 +1,145 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Asesor de Rótulos – PrintLowCost</title>
-<style>
-body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f4f4f4; }
-.wrap { max-width:900px; margin:20px auto; padding:20px; background:#fff; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.1); }
-h1 { text-align:center; }
-.lead { font-size:14px; line-height:1.5; margin-bottom:20px; text-align:center;}
-.grid { display:flex; flex-wrap:wrap; gap:20px; }
-section { flex:1 1 300px; }
-aside { flex:1 1 300px; background:#fafafa; padding:15px; border-radius:12px; }
-#description{height:200px; overflow-y:auto; background:#fff; color:#000; padding:10px; border-radius:12px; font-size:14px; line-height:1.4; white-space:pre-wrap;}
-#rotulo-image{max-width:100%; margin-top:10px; border-radius:12px; display:block;}
-label { display:block; margin-bottom:5px; font-weight:bold; }
-input, select { width:100%; padding:6px 8px; border-radius:6px; border:1px solid #ccc; }
-.price-row { display:flex; justify-content:space-between; margin-top:5px; font-weight:bold; }
-img#logo { display:block; margin:0 auto 15px; max-width:250px; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asesor de Rótulos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+      text-align: center;
+    }
+    header {
+      background: #222;
+      color: white;
+      padding: 20px;
+    }
+    header img {
+      max-width: 280px;
+      display: block;
+      margin: 0 auto 10px auto;
+    }
+    h1 {
+      margin: 10px 0;
+    }
+    .rotulo {
+      background: white;
+      margin: 20px auto;
+      padding: 15px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 700px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .rotulo img {
+      max-width: 100%;
+      border-radius: 8px;
+    }
+    footer {
+      background: #222;
+      color: white;
+      padding: 10px;
+      margin-top: 30px;
+    }
+  </style>
 </head>
 <body>
-<div class="wrap">
-  <img id="logo" src="img/logo-print.jpg" alt="Logo PrintLowCost">
-  <h1>Asesor de Rótulos – PrintLowCost</h1>
-  <p class="lead">
-    Ancho máximo de los rótulos en una sola pieza: 298 cm.<br>
-    Toda otra medida es fuera de lo estándar.
-  </p>
-  <div class="grid">
-    <section>
-      <label for="rotulo">Tipo de rótulo</label>
-      <select id="rotulo"></select>
-      <label for="qty">Cantidad (ml)</label>
-      <input id="qty" type="number" min="0.01" step="0.01" value="1" />
-      <div class="price-row"><span>Precio de referencia:</span><span id="price-ref">€0.00</span></div>
-      <div class="price-row"><span>Instalación:</span><span id="installation">€0.00</span></div>
-      <div class="price-row"><span>Total sugerido:</span><span id="total-price">€0.00</span></div>
-    </section>
-    <aside>
-      <h3>Descripción</h3>
-      <div id="description"></div>
-      <img id="rotulo-image" src="" alt="Imagen del rótulo">
-    </aside>
+
+  <header>
+    <img src="img/logo%20hori%20printlowcost_Mesa%20de%20trabajo%201.jpg" alt="Logo Printlowcost">
+    <h1>ASESOR DE RÓTULOS</h1>
+    <p>Ancho máximo en una sola pieza: <strong>298 cm</strong><br>
+    Todo lo que supere esta medida es “fuera de estándar”.</p>
+  </header>
+
+  <!-- Rótulo 1 -->
+  <div class="rotulo">
+    <h2>Rótulo 1</h2>
+    <img src="img/rotulo1.jpeg" alt="Rótulo 1">
+    <p>Instalación: <strong>120 €</strong></p>
   </div>
-</div>
-<script>
-const ROTULOS = [
-  {id:'1', name:'Rótulo plano', desc:'Sistema: fijado a la pared. Material: Dibond vinilado. Altura máxima 68 cm. Instalación aparte €120.', image:'img/rotulo1.jpeg', instalacion:120},
-  {id:'2', name:'Placa de Dibond con guías', desc:`Sistema: anclajes a la pared + guías en color negro o blanco.\nOpciones de cartel.\n> Primer metro: 180 €\n> Hasta 3 metros: 144 €/ml\n> Más de 3 metros: Fuera de estándar`, image:'img/rotulo2.jpg', instalacion:180},
-  {id:'3', name:'Cajas de luz LED', desc:`Caja con iluminación LED interna.\nFrontal: metacrilato opal vinilado.`, image:'img/rotulo3.jpeg', instalacion:0},
-  {id:'4', name:'Guías + letras corpóreas', desc:'Guías y anclajes + letras corpóreas. Precio mínimo 219 € incluyendo letras. Altura máxima 60 cm. Instalación aparte.', image:'img/rotulo4.jpeg', instalacion:0},
-  {id:'5', name:'Luminoso bandeja calada', desc:'Luminoso bandeja calada, Dibond, iluminación interior.', image:'img/rotulo5.jpg', instalacion:0},
-  {id:'6', name:'Bandeja calada con letras', desc:'Bandeja calada con letras sobresalientes, letras blanco opal. Instalación aparte.', image:'img/rotulo6.jpeg', instalacion:0},
-  {id:'7', name:'Letras corpóreas sin base', desc:'Letras corpóreas sin base sin luz, PVC 5–19 mm. Instalación aparte.', image:'img/rotulo7.jpeg', instalacion:0},
-  {id:'8', name:'Letras retroiluminadas', desc:'Letras corpóreas retroiluminadas, PVC 19 mm, blanco/negro. Instalación aparte.', image:'img/rotulo8.jpg', instalacion:0},
-  {id:'9', name:'Pantalla LED', desc:'Pantalla LED. Ajustar a módulos. Precio orientativo; sujeto a confirmación.', image:'img/rotulo9.jpeg', instalacion:0}
-];
 
-document.addEventListener('DOMContentLoaded', () => {
-  const rotuloSelect = document.getElementById('rotulo');
-  const qtyInput = document.getElementById('qty');
-  const priceRef = document.getElementById('price-ref');
-  const totalPrice = document.getElementById('total-price');
-  const descriptionDiv = document.getElementById('description');
-  const rotuloImage = document.getElementById('rotulo-image');
-  const installationSpan = document.getElementById('installation');
+  <!-- Rótulo 2 -->
+  <div class="rotulo">
+    <h2>Rótulo 2</h2>
+    <img src="img/rotulo2.jpg" alt="Rótulo 2">
+    <p>Fuera de estándar</p>
+  </div>
 
-  // Cargar select
-  rotuloSelect.innerHTML = ROTULOS.map(r => `<option value="${r.id}">${r.name}</option>`).join('');
+  <!-- Rótulo 3 -->
+  <div class="rotulo">
+    <h2>Rótulo 3</h2>
+    <img src="img/rotulo3.jpeg" alt="Rótulo 3">
+    <p>0–1 m: 480 €<br>
+       1,01–2 m: 420 €<br>
+       2,01–3 m: 280 €</p>
+  </div>
 
-  // Funciones de precio por tipo
-  function precioRotulo2(qty){ if(qty>3) return "Fuera de estándar"; if(qty<=1) return 180*qty; return 180 + (qty-1)*144; }
-  function precioRotulo3(qty){ if(qty>3) return "Fuera de estándar"; if(qty<=1) return 480; if(qty<=2) return 480 + (qty-1)*420; return 480 + 420 + (qty-2)*280; }
-  function precioRotulo5(qty){ if(qty>3) return "Fuera de estándar"; if(qty<=1) return 570; if(qty<=2) return 570 + (qty-1)*450; return 570 + 450 + (qty-2)*380; }
-  function precioRotulo6(qty){ if(qty>3) return "Fuera de estándar"; if(qty<=1) return 730; if(qty<=2) return 730 + (qty-1)*650; return 730 + 650 + (qty-2)*580; }
-  function precioRotulo7(qty){ if(qty>3) return "Fuera de estándar"; if(qty<=1) return 430; if(qty<=2) return 430 + (qty-1)*380; return 430 + 380 + (qty-2)*320; }
-  function precioRotulo8(qty){ if(qty>3) return "Fuera de estándar"; if(qty<=1) return 430; if(qty<=2) return 430 + (qty-1)*360; return 430 + 360 + (qty-2)*279; }
-  function precioRotulo9(qty){ if(qty>3) return "Fuera de estándar"; if(qty<=1) return 3500; if(qty<=2) return 3500 + (qty-1)*2800; return 3500 + 2800 + (qty-2)*2400; }
+  <!-- Rótulo 4 -->
+  <div class="rotulo">
+    <h2>Rótulo 4</h2>
+    <img src="img/rotulo4.jpeg" alt="Rótulo 4">
+    <p>Precio según especificaciones</p>
+  </div>
 
-  function updateValues(){
-    const selected = ROTULOS.find(r => r.id===rotuloSelect.value);
-    const qty = parseFloat(qtyInput.value) || 0;
-    let price=0;
+  <!-- Rótulo 5 -->
+  <div class="rotulo">
+    <h2>Rótulo 5</h2>
+    <img src="img/rotulo5.jpg" alt="Rótulo 5">
+    <p>0–1 m: 570 €<br>
+       1,01–2 m: 450 €<br>
+       2,01–3 m: 380 €</p>
+  </div>
 
-    switch(selected.id){
-      case '2': price=precioRotulo2(qty); break;
-      case '3': price=precioRotulo3(qty); break;
-      case '5': price=precioRotulo5(qty); break;
-      case '6': price=precioRotulo6(qty); break;
-      case '7': price=precioRotulo7(qty); break;
-      case '8': price=precioRotulo8(qty); break;
-      case '9': price=precioRotulo9(qty); break;
-      default: price=219; break; // precio mínimo u orientativo
-    }
+  <!-- Rótulo 6 -->
+  <div class="rotulo">
+    <h2>Rótulo 6</h2>
+    <img src="img/rotulo6.jpeg" alt="Rótulo 6">
+    <p>0–1 m: 730 €<br>
+       1,01–2 m: 650 €<br>
+       2,01–3 m: 580 €</p>
+  </div>
 
-    // Actualizar precios
-    priceRef.textContent = (typeof price==='number')?`€${price.toFixed(2)}`:price;
-    installationSpan.textContent = `€${selected.instalacion.toFixed(2)}`;
-    totalPrice.textContent = (typeof price==='number')?`€${(price+selected.instalacion).toFixed(2)}`:"Consultar";
+  <!-- Rótulo 7 -->
+  <div class="rotulo">
+    <h2>Rótulo 7</h2>
+    <img src="img/rotulo7.jpeg" alt="Rótulo 7">
+    <p>0–1 m: 430 €<br>
+       1,01–2 m: 380 €<br>
+       2,01–3 m: 320 €</p>
+  </div>
 
-    // Descripción + imagen
-    descriptionDiv.textContent = selected.desc;
-    rotuloImage.src = selected.image;
-  }
+  <!-- Rótulo 8 -->
+  <div class="rotulo">
+    <h2>Rótulo 8</h2>
+    <img src="img/rotulo8.jpg" alt="Rótulo 8">
+    <p>0–1 m: 430 €<br>
+       1,01–2 m: 360 €<br>
+       2,01–3 m: 279 €</p>
+  </div>
 
-  rotuloSelect.addEventListener('change', updateValues);
-  qtyInput.addEventListener('input', updateValues);
-  updateValues();
-});
-</script>
+  <!-- Rótulo 9 -->
+  <div class="rotulo">
+    <h2>Rótulo 9</h2>
+    <img src="img/rotulo9.jpeg" alt="Rótulo 9">
+    <p>0–1 m: 3500 €<br>
+       1,01–2 m: 2800 €<br>
+       2,01–3 m: 2400 €</p>
+  </div>
+
+  <!-- Pantalla LED -->
+  <div class="rotulo">
+    <h2>Pantalla LED</h2>
+    <p>Se ajusta a tamaño de módulos.<br>
+       Precio orientativo.</p>
+  </div>
+
+  <footer>
+    <p>© 2025 Printlowcost - Asesor de Rótulos</p>
+  </footer>
+
 </body>
 </html>
